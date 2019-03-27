@@ -1,6 +1,8 @@
 package com.mundosoftbol.site.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,13 +18,12 @@ public class PatoPruebaController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String pato() {
+	public ResponseEntity<String> pato() {
 		StringBuilder stringBuilder = new StringBuilder();
 		patoPruebaRepository.findAll().forEach(str ->{
 			stringBuilder.append(str.getId());
 		});
-		System.out.println(stringBuilder.toString());
-		return stringBuilder.toString();
+		return new ResponseEntity<String>(new String(stringBuilder.toString()), HttpStatus.OK);
 	}
 	
 	
