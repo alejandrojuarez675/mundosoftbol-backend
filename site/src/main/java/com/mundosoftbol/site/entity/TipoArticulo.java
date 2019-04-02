@@ -3,7 +3,8 @@ package com.mundosoftbol.site.entity;
 public enum TipoArticulo {
 	
 	Normal(1,"NORMAL","articulo de tamaño normal"),
-	MiniArticulo(2,"MINI", "articulo miniatura que va del lado derecho")
+	MiniArticulo(2,"MINI", "articulo miniatura que va del lado derecho"),
+	SoloImagen(3,"IMAGEN","articulo que es solo una imagen")
 	;
 	
 	private long id;
