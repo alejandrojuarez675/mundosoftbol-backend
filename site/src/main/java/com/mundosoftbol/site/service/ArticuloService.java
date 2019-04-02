@@ -11,4 +11,5 @@ public interface ArticuloService {
 	void delete(Articulo articulo);
 	void delete(ArticuloDTO articuloDTO);
 	List<ArticuloDTO> searchTop10();
+	ArticuloDTO search(Long id);
 }

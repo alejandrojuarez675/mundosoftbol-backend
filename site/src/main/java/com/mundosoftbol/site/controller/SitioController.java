@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,5 +47,24 @@ public class SitioController {
 		
 		return new ResponseEntity<PaginaDTO>(pagina, HttpStatus.OK);
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
+	public ResponseEntity<PaginaDTO> articulo(@PathVariable("id") Long id) {
+		
+		PaginaDTO pagina = new PaginaDTO();
+		
+		List<ArticuloDTO> articuloDTOs = new ArrayList<>();
+		List<PublicidadDTO> publicidadDTOs = new ArrayList<>();
+		
+		articuloDTOs.add(articuloService.search(id));
+		publicidadDTOs = publicidadService.search();
+		
+		pagina.setArticuloDTOs(articuloDTOs);
+		pagina.setPublicidadDTOs(publicidadDTOs);
+		
+		return new ResponseEntity<PaginaDTO>(pagina, HttpStatus.OK);
+	}
+
 	
 }

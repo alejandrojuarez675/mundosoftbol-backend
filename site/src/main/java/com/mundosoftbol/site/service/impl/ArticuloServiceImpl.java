@@ -106,4 +106,9 @@ public class ArticuloServiceImpl implements ArticuloService{
 		return articuloDTO;
 	}
 
+	@Override
+	public ArticuloDTO search(Long id) {
+		return entityToDto(articuloRepository.findById(id).get());
+	}
+
 }
