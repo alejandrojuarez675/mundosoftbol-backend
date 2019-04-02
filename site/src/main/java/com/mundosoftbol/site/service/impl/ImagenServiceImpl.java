@@ -1,5 +1,6 @@
 package com.mundosoftbol.site.service.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,21 @@ public class ImagenServiceImpl implements ImagenService{
 	@Override
 	public Imagen save(Imagen imagen) {
 		return imagenRepository.save(imagen);
+	}
+
+	@Override
+	public ImagenDTO entityToDto(Imagen entity) {
+		ImagenDTO dto = new ImagenDTO();
+		
+		ModelMapper mapper = new ModelMapper();
+		mapper.map(entity, dto);
+		
+		return dto;
+	}
+
+	@Override
+	public Imagen findById(long id) {
+		return imagenRepository.findById(id).get();
 	}
 
 }

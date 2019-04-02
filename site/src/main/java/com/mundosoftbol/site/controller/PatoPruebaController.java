@@ -17,7 +17,7 @@ public class PatoPruebaController {
 	private PatoPruebaRepository patoPruebaRepository;
 	
 	@ResponseBody
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/patoprueba", method = RequestMethod.GET)
 	public ResponseEntity<String> pato() {
 		StringBuilder stringBuilder = new StringBuilder();
 		patoPruebaRepository.findAll().forEach(str ->{

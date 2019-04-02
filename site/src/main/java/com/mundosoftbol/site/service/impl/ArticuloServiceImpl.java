@@ -1,10 +1,14 @@
 package com.mundosoftbol.site.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mundosoftbol.site.dto.ArticuloDTO;
+import com.mundosoftbol.site.dto.ImagenDTO;
 import com.mundosoftbol.site.entity.Articulo;
 import com.mundosoftbol.site.entity.ArticuloImagen;
 import com.mundosoftbol.site.entity.Imagen;
@@ -78,6 +82,28 @@ public class ArticuloServiceImpl implements ArticuloService{
 			
 			articuloRepository.delete(articulo);
 		}
+	}
+
+	@Override
+	public List<ArticuloDTO> searchTop10() {
+		List<ArticuloDTO> list = new ArrayList<>();
+		articuloRepository.findTop10().forEach(entity -> list.add(entityToDto(entity)) );
+		return list;
+	}
+
+	private ArticuloDTO entityToDto(Articulo entity) {
+		ArticuloDTO articuloDTO = new ArticuloDTO();
+		
+		ModelMapper mapper = new ModelMapper();
+		mapper.map(entity, articuloDTO);
+		
+		List<ImagenDTO> list = new ArrayList<>();
+		entity.getArticuloImagenes().forEach(articuloImagen->{
+			list.add(imagenService.entityToDto(articuloImagen.getImagen()));
+		});
+		articuloDTO.setImagenes(list);
+		
+		return articuloDTO;
 	}
 
 }
